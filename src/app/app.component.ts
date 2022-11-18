@@ -110,6 +110,9 @@ export class AppComponent {
           label: 'Place',
           options:[] 
         },
+        expressionProperties:{
+         'templateOptions.disabled': model => !model.stateId
+        },
         hooks:{
           onInit:(field: FormlyFieldConfig) =>{
             field.templateOptions.options = field.form.get('stateId').valueChanges.pipe(
