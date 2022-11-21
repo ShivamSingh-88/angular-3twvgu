@@ -14,14 +14,15 @@ export class AppComponent {
     id: [''],
     firstName: [''],
     lastName: [''],
+    age:[''],
     gender: [''],
     email: [''],
     department: [''],
-    stateId:[''],
-    placeId:['']
+    stateId: [''],
+    placeId: [''],
   };
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
   fields: FormlyFieldConfig[] = [
     {
       key: 'id',
@@ -54,6 +55,22 @@ export class AppComponent {
       },
     },
     {
+      key: 'age',
+      type: 'input',
+      templateOptions: {
+        label: 'Age',
+        type: 'number',
+        min:18
+      },
+       // here validation message is written to override the global messgae
+        validation:{
+        messages: {
+        min:'Your age must be grater than 18 years'
+      }
+    }
+    
+  },
+    {
       key: 'gender',
       type: 'input',
       templateOptions: {
@@ -78,7 +95,7 @@ export class AppComponent {
         label: 'Department',
         type: 'string',
         required: true,
-      }, 
+      },
     },
     {
       key: 'stateId',
@@ -86,41 +103,43 @@ export class AppComponent {
       templateOptions: {
         label: 'State',
         // options:this.dataService.getState()
-        options:[
+        options: [
           {
-            value:1,
-            label:"Uttar Pradesh"
-           },
-           {
-            value:2,
-            label:"Andhra Pradesh"
-           }
-           ,
-           {
-            value:3,
-            label:"Madhya Pradesh"
-           }
-        ],       
-      }
+            value: 1,
+            label: 'Uttar Pradesh',
+          },
+          {
+            value: 2,
+            label: 'Andhra Pradesh',
+          },
+          {
+            value: 3,
+            label: 'Madhya Pradesh',
+          },
+        ],
+      },
     },
-      {
-        key: 'placeId',
-        type: 'select',
-        templateOptions: {
-          label: 'Place',
-          options:[] 
+    {
+      key: 'placeId',
+      type: 'select',
+      templateOptions: {
+        label: 'Place',
+        options: [],
+      },
+      expressionProperties: {
+        'templateOptions.disabled': (model) => !model.stateId,
+      },
+      hideExpression: '!model.placeId',
+      hooks: {
+        onInit: (field: FormlyFieldConfig) => {
+          field.templateOptions.options = field.form
+            .get('stateId')
+            .valueChanges.pipe(
+              switchMap((stateId) => this.dataService.getPlace(stateId))
+            );
         },
-        expressionProperties:{
-         'templateOptions.disabled': model => !model.stateId
-        },
-        hooks:{
-          onInit:(field: FormlyFieldConfig) =>{
-            field.templateOptions.options = field.form.get('stateId').valueChanges.pipe(
-              switchMap(stateId => this.dataService.getPlace(stateId))
-            )
-          }
-        }
-      }
+      },
+    },
   ];
   onSubmit(model: any) {
     console.log(model);
