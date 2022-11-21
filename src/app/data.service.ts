@@ -5,34 +5,34 @@ import { of } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  getState() {
-    return of([
-      {
-        value: null,
-        label: '----',
-      },
-      {
-        value: 1,
-        label: 'Uttar Pradesh',
-      },
-      {
-        value: 2,
-        label: 'Andhra Pradesh',
-      },
-      {
-        value: 3,
-        label: 'Madhya Pradesh',
-      },
-      {
-        value: 4,
-        label: 'Himanchal Pradesh',
-      },
-      {
-        value: 5,
-        label: 'Arunachal Pradesh',
-      },
-    ]);
-  }
+  // getState() {
+  //   return of([
+  //     {
+  //       value: null,
+  //       label: '----',
+  //     },
+  //     {
+  //       value: 1,
+  //       label: 'Uttar Pradesh',
+  //     },
+  //     {
+  //       value: 2,
+  //       label: 'Andhra Pradesh',
+  //     },
+  //     {
+  //       value: 3,
+  //       label: 'Madhya Pradesh',
+  //     },
+  //     {
+  //       value: 4,
+  //       label: 'Himanchal Pradesh',
+  //     },
+  //     {
+  //       value: 5,
+  //       label: 'Arunachal Pradesh',
+  //     },
+  //   ]);
+  // }
 
   getPlace(stateId: number = null) {
     return of(

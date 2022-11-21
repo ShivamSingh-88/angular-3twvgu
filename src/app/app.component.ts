@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { switchMap } from 'rxjs';
+import { IdValidator } from './app.module';
 import { DataService } from './data.service';
 
 @Component({

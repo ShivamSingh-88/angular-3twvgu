@@ -23,18 +23,17 @@ export function IdValidator(control: AbstractControl): ValidationErrors | null {
   return /^[a-zA-Z0-9_]$/.test(control.value)
     ? null
     : ALPHA_NUMERIC_VALIDATION_ERROR;
-};
-export function minValidationMessage(err, field:FormlyFieldConfig){
-  return `Please provide a value larger than ${err.min}`
 }
-
+export function minValidationMessage(err, field: FormlyFieldConfig) {
+  return `Please provide a value larger than ${err.min}`;
+}
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormlyBootstrapModule,
-    //Formly.forroot is used for defining the global messages and to overrite this global message write the message in the 
+    //Formly.forroot is used for defining the global messages and to overrite this global message write the message in the
     FormlyModule.forRoot({
       validators: [
         {
@@ -52,9 +51,9 @@ export function minValidationMessage(err, field:FormlyFieldConfig){
           message: 'Field is required',
         },
         {
-          name:'min',
-          message: minValidationMessage
-        }
+          name: 'min',
+          message: minValidationMessage,
+        },
       ],
     }),
   ],
